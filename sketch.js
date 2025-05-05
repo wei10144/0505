@@ -1,4 +1,3 @@
-
 // Hand Pose Detection with ml5.js
 // https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/hand-pose
 
@@ -48,6 +47,33 @@ function draw() {
 
           noStroke();
           circle(keypoint.x, keypoint.y, 16);
+        }
+
+        // Draw lines connecting keypoints 0 to 4
+        strokeWeight(2);
+        if (hand.handedness == "Left") {
+          stroke(255, 0, 255); // Left hand color
+        } else {
+          stroke(255, 255, 0); // Right hand color
+        }
+
+        for (let i = 0; i < 4; i++) {
+          let start = hand.keypoints[i];
+          let end = hand.keypoints[i + 1];
+          line(start.x, start.y, end.x, end.y);
+        }
+
+        // Draw lines connecting keypoints 5 to 8
+        if (hand.handedness == "Left") {
+          stroke(0, 255, 255); // Different color for left hand
+        } else {
+          stroke(0, 255, 0); // Different color for right hand
+        }
+
+        for (let i = 5; i < 8; i++) {
+          let start = hand.keypoints[i];
+          let end = hand.keypoints[i + 1];
+          line(start.x, start.y, end.x, end.y);
         }
       }
     }
